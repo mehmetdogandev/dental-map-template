@@ -59,7 +59,7 @@ Diş Haritası, diş hekimlerinin hasta tedavi kayıtlarını interaktif bir şe
         <small>Seçilen dişler için animasyonlar</small>
       </td>
       <td align="center" width="33%">
-        <img src="https://img.icons8.com/color/48/000000/responsive.png" width="48px"/><br/>
+        <img src="images/responcive.png" width="48px"/><br/>
         <b>Responsive Tasarım</b><br/>
         <small>Mobil ve masaüstü uyumlu</small>
       </td>
