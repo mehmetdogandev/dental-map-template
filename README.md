@@ -23,10 +23,10 @@ Diş Haritası, diş hekimlerinin hasta tedavi kayıtlarını interaktif bir şe
 ### ✨ Demo
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=example">
-    <img src="https://github.com/mehmetdogandev/dental-map-template/raw/main/images/demo-video-cover.png" alt="Diş Haritası Demo Video" width="600">
+  <a href="https://youtu.be/kmRgvLQL28g">
+    <img src="images/demo-video-cover.png" alt="Diş Haritası Demo Video" width="600">
   </a>
-  <p><a href="https://www.youtube.com/watch?v=example">🎬 Detaylı tanıtım videosunu izlemek için tıklayın</a></p>
+  <p><a href="">🎬 Detaylı tanıtım videosunu izlemek için tıklayın</a></p>
 </div>
 
 ## 🚀 Özellikler
