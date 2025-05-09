@@ -1,7 +1,7 @@
 # 🦷 Diş Haritası - Dental Charting System
 
 <div align="center">
-  <img src="https://github.com/mehmetdogandev/dental-map-template/raw/main/images/dental-banner.png" alt="Diş Haritası Banner" width="800">
+  <img src="images/banner.png" alt="Diş Haritası Banner" width="800">
   
   <p align="center">
     <b>Modern, İnteraktif ve Kullanıcı Dostu Diş Hekimliği Uygulaması</b>
