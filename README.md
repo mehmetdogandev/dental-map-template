@@ -210,6 +210,16 @@ Diş seçiminde kullanıcı deneyimini zenginleştirmek için CSS animasyonları
 <div align="center">
   <table>
     <tr>
+       <td align="center">
+        <a href="https://github.com/mehmetdogandev">
+          <img src="https://github.com/mehmetdogandev.png" width="100px;" alt="Mehmet Doğan"/>
+          <br />
+          <b>Mehmet Doğan</b>
+        </a>
+        <br />
+        <small>JavaScript ve Detay Sayfaları</small>
+      </td>
+      
       <td align="center">
         <a href="https://github.com/enesbekik">
           <img src="https://github.com/enesbekik.png" width="100px;" alt="Enes Bekik"/>
@@ -219,15 +229,7 @@ Diş seçiminde kullanıcı deneyimini zenginleştirmek için CSS animasyonları
         <br />
         <small>SVG Diş Haritası Geliştirme</small>
       </td>
-      <td align="center">
-        <a href="https://github.com/mehmetdogandev">
-          <img src="https://github.com/mehmetdogandev.png" width="100px;" alt="Mehmet Doğan"/>
-          <br />
-          <b>Mehmet Doğan</b>
-        </a>
-        <br />
-        <small>JavaScript ve Detay Sayfaları</small>
-      </td>
+   
     </tr>
   </table>
 </div>
