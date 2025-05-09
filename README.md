@@ -57,7 +57,7 @@ dental-chart/
 1. Bu depoyu klonlayın:
 
    ```bash
-   git clone https://github.com/mehmetdogandev/dis-haritasi.git
+   git clone https://github.com/mehmetdogandev/dental-map-template.git
    ```
 
 2. Proje klasörüne gidin:
