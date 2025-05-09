@@ -20,13 +20,15 @@
 
 Diş Haritası, diş hekimlerinin hasta tedavi kayıtlarını interaktif bir şekilde tutabilecekleri modern ve kullanıcı dostu bir web uygulamasıdır. SVG tabanlı diş haritası üzerinden tedavi edilen dişlerin işaretlenmesini, detaylı notların kaydedilmesini ve hastaların geçmiş tedavi kayıtlarının yönetilmesini sağlar.
 
-### ✨ Demo
+### ✨ Demo & Proje Kodları Anlatımı
 
 <div align="center">
   <a href="https://youtu.be/kmRgvLQL28g">
     <img src="images/demo-video-cover.png" alt="Diş Haritası Demo Video" width="600">
   </a>
-  <p><a href="">🎬 Detaylı tanıtım videosunu izlemek için tıklayın</a></p>
+  <p><a href="https://youtu.be/kmRgvLQL28g">🎬 Basit ve kısa tanıtım videosunu izlemek için tıklayın</a></p>
+    <p><a href="">🎬 Proje Kodlarının anlatıldığı videoya ulaşmak için lütfen Tıklayınız</a></p>
+
 </div>
 
 ## 🚀 Özellikler
