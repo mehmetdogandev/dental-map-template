@@ -27,9 +27,16 @@ Diş Haritası, diş hekimlerinin hasta tedavi kayıtlarını interaktif bir şe
     <img src="images/demo-video-cover.png" alt="Diş Haritası Demo Video" width="600">
   </a>
   <p><a href="https://youtu.be/kmRgvLQL28g">🎬 Basit ve kısa tanıtım videosunu izlemek için tıklayın</a></p>
-    <p><a href="">🎬 Proje Kodlarının anlatıldığı videoya ulaşmak için lütfen Tıklayınız</a></p>
+    <p><a href="https://youtu.be/E40Gt2pv8sQ">🎬 Proje Kodlarının anlatıldığı videoya ulaşmak için lütfen Tıklayınız</a></p>
 
 </div>
+<div align="center">
+  <a href="">
+    <img src="yapilan-islem-mantik.svg" alt="Diş Haritası Çalışma Mantığı" width="600">
+  </a>
+
+</div>
+
 
 ## 🚀 Özellikler
 
