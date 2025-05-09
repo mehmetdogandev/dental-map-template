@@ -1,0 +1,476 @@
+/* Ana stiller */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f8fc;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header stili */
+.header {
+    background: linear-gradient(145deg, #0066cc, #0055aa);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.patient-info {
+    flex: 1;
+}
+
+.treatment-info {
+    flex: 1;
+    text-align: right;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Ana içerik */
+.content {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.dental-map-container {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dental-map-title {
+    color: #0066cc;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid #99c2ff;
+    padding-bottom: 10px;
+}
+
+.tooth-map-placeholder {
+    background-color: #f0f7ff;
+    border: 2px dashed #99c2ff;
+    border-radius: 8px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.treatment-details {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.treatment-title {
+    color: #0066cc;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid #99c2ff;
+    padding-bottom: 10px;
+}
+
+.details-list {
+    list-style-type: none;
+}
+
+.details-list li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+}
+
+.details-list li:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: bold;
+    width: 180px;
+    color: #666;
+}
+
+.detail-value {
+    flex: 1;
+}
+
+.detail-with-icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    color: #0066cc;
+}
+
+.doctor-info {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    background-color: #f0f7ff;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.doctor-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #0066cc;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+/* Diş işaretleri */
+.tooth-notes {
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tooth-notes-title {
+    color: #0066cc;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid #99c2ff;
+    padding-bottom: 10px;
+}
+
+.tooth-note-item {
+    background-color: #f0f7ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid #0066cc;
+}
+
+.tooth-number {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #0066cc;
+}
+
+.tooth-note {
+    color: #444;
+    font-size: 15px;
+}
+
+.tooth-note-image {
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+/* İlgili işlemler */
+.related-treatments {
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.related-title {
+    color: #0066cc;
+    margin-bottom: 20px;
+    font-size: 18px;
+    border-bottom: 2px solid #99c2ff;
+    padding-bottom: 10px;
+}
+
+.related-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.related-item {
+    background-color: #f0f7ff;
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.related-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.related-date {
+    font-size: 14px;
+    color: #666;
+}
+
+.related-treatment {
+    font-weight: bold;
+    margin: 5px 0;
+    color: #0066cc;
+}
+
+.related-teeth {
+    font-size: 14px;
+    color: #666;
+}
+
+.related-link {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #0066cc;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.related-link:hover {
+    background-color: #0055aa;
+}
+
+/* Bilgilendirme kutucuğu */
+.info-box {
+    background-color: #e6f7ff;
+    border-left: 4px solid #0066cc;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 4px;
+}
+
+.info-box h4 {
+    color: #0066cc;
+    margin-bottom: 5px;
+}
+
+.info-box p {
+    color: #444;
+    font-size: 14px;
+}
+
+/* Mobil için responsive düzenleme */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .header-info {
+        flex-direction: column;
+    }
+
+    .treatment-info {
+        text-align: left;
+        margin-top: 15px;
+    }
+
+    .related-items {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Diş işaretleri (sarı renkli dişler) */
+.saved-tooth {
+    fill: #ffeb3b !important;
+    /* Sarı */
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+}
+
+.selected-tooth {
+    transform-origin: center;
+    animation: toothPop 0.5s forwards;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.7));
+    z-index: 100;
+}
+
+@keyframes toothPop {
+    0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        fill: #fff;
+    }
+
+    20% {
+        transform: translateY(-25px) scale(1.15) rotate(-2deg);
+        fill: #e6f7ff;
+    }
+
+    40% {
+        transform: translateY(-35px) scale(1.2) rotate(2deg);
+        fill: #b3e0ff;
+    }
+
+    60% {
+        transform: translateY(-30px) scale(1.18) rotate(-1deg);
+        fill: #99d6ff;
+    }
+
+    80% {
+        transform: translateY(-25px) scale(1.15) rotate(1deg);
+        fill: #80ccff;
+    }
+
+    100% {
+        transform: translateY(-20px) scale(1.12) rotate(0deg);
+        fill: #66c2ff;
+    }
+}
+
+/* Tedavi görmüş dişler için sarı renk */
+.saved-tooth {
+    fill: #ffeb3b !important;
+    /* Sarı */
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+}
+
+/* Not popup'ı için stiller */
+.input-popup {
+    position: absolute;
+    display: none;
+    z-index: 200;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background: linear-gradient(145deg, #f0f7ff, #e6f0ff);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2),
+        0 5px 10px rgba(0, 0, 0, 0.1), inset 0 -5px 10px rgba(0, 0, 0, 0.05),
+        inset 0 5px 10px rgba(255, 255, 255, 0.2);
+    min-width: 200px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(5px);
+    transform: translate(-50%, -120%) scale(0.8);
+    opacity: 0;
+}
+
+.input-popup.active {
+    transform: translate(-50%, -120%) scale(1);
+    opacity: 1;
+}
+
+.tooth-info {
+    text-align: center;
+    font-weight: bold;
+    color: #0066cc;
+    margin-bottom: 8px;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.note-content {
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Pulse arka plan efekti */
+.pulse-bg {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(102, 204, 255, 0.3) 0%,
+            rgba(102, 204, 255, 0) 70%);
+    animation: pulse 2s infinite;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 50;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.7;
+    }
+}
+
+/* Parlama efekti */
+.tooth-highlight {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at 30% 30%,
+            rgba(255, 255, 255, 0.8) 0%,
+            rgba(255, 255, 255, 0) 70%);
+    opacity: 0;
+    animation: highlight 1s forwards;
+    pointer-events: none;
+}
+
+@keyframes highlight {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.7;
+    }
+}
