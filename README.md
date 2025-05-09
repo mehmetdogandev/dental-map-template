@@ -256,7 +256,7 @@ Bu proje [MIT Lisansı](LICENSE) altında lisanslanmıştır.
 ---
 
 <div align="center">
-  <p>Developed with ❤️ by <a href="https://github.com/mehmetdogandev">Mehmet Doğan</a></p>
+  <p>Developed with ❤️ by <a href="https://github.com/mehmetdogandev">Mehmet DOĞAN</a></p>
   <a href="https://github.com/mehmetdogandev/dental-map-template/stargazers">
     <img src="https://img.shields.io/github/stars/mehmetdogandev/dental-map-template?style=flat-square" alt="Stars"/>
   </a>

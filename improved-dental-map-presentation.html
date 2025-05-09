@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diş Haritası Projesi - Interaktif SVG Tabanlı Web Uygulaması</title>
+    <style>
+        :root {
+            --primary: #2a6fc7;
+            --secondary: #f39c12;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #274d8a);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--primary);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: var(--dark);
+        }
+        
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #e6e6e6;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .code-header {
+            background: #1e1e1e;
+            color: #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 5px 5px 0 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .code-content {
+            padding: 1rem;
+            line-height: 1.4;
+        }
+        
+        .comment {
+            color: #6A9955;
+        }
+        
+        .keyword {
+            color: #569CD6;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .feature-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .code-image {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-caption {
+            font-style: italic;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+        
+        .note {
+            background-color: #e7f5ff;
+            border-left: 4px solid var(--info);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fff8e6;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .highlight {
+            background-color: #ffffcc;
+            padding: 0 0.25rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .function-flow {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .flow-steps {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding-left: 0;
+        }
+        
+        .flow-step {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 1rem;
+            counter-increment: step-counter;
+        }
+        
+        .flow-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .flow-step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 30px;
+            bottom: -10px;
+            width: 2px;
+            background-color: #e9ecef;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #1d5aaa;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .code-block {
+                font-size: 14px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .animated-svg {
+            display: block;
+            margin: 2rem auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Animasyonlar için CSS */
+        @keyframes toothPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1.2); }
+        }
+        
+        @keyframes highlight {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.4; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .tab-container {
+            margin: 2rem 0;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        
+        .tab.active {
+            background: white;
+            border-bottom: 1px solid white;
+            margin-bottom: -1px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-top: none;
+            background: white;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Diş Haritası Projesi</h1>
+            <p>SVG Tabanlı İnteraktif Hasta Takip Sistemi</p>
+        </header>
+        
+        <div class="section">
+            <h2>Proje Tanıtımı</h2>
+            <div class="card">
+                <p>Merhaba! Ben Mehmet Doğan. Bu proje, diş hekimleri için tasarlanmış, SVG tabanlı interaktif bir diş haritası uygulamasıdır. Bu uygulama sayesinde:</p>
+                <ul>
+                    <li>Hasta kayıtları kolayca tutulabilir</li>
+                    <li>Tedavi notları dişler üzerinde saklanabilir</li>
+                    <li>Geçmiş işlemler görüntülenebilir</li>
+                    <li>Tedavi planları yönetilebilir</li>
+                </ul>
+                <p>Proje, herhangi bir framework kullanılmadan yalnızca HTML, CSS ve vanilla JavaScript ile geliştirilmiştir.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Projenin Teknik Yapısı</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-title">HTML Bileşenleri</div>
+                    <ul>
+                        <li>Başlık ve yönlendirme metni</li>
+                        <li>SVG formatında diş haritası</li>
+                        <li>Tedavi notu girişi için popup</li>
+                        <li>Kaydedilen işlemlerin listesi</li>
+                        <li>Geçmiş tedavi kayıtları tablosu</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">CSS Özellikleri</div>
+                    <ul>
+                        <li>Responsive tasarım (tüm cihazlarda uyumlu)</li>
+                        <li>Animasyonlar (toothPop, highlight, pulse)</li>
+                        <li>Popup sistemleri için stil tanımları</li>
+                        <li>Diş haritası için özel stil tanımları</li>
+                        <li>Tablo ve listeler için modern görünüm</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">JavaScript Fonksiyonları</div>
+                    <ul>
+                        <li>DOM ile etkileşim için event listener'lar</li>
+                        <li>Diş seçimi ve animasyon efektleri</li>
+                        <li>Not ekleme ve kaydetme işlemleri</li>
+                        <li>Popup konumlandırma ve yönetimi</li>
+                        <li>Dinamik içerik güncelleme</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">SVG Diş Haritası</div>
+                    <ul>
+                        <li>Vektörel format - her ekranda net görüntü</li>
+                        <li>Her diş için benzersiz ID tanımları</li>
+                        <li>JavaScript ile kolay etkileşim</li>
+                        <li>Tedavi durumuna göre renk değişimleri</li>
+                        <li>Enes Bekik tarafından özel tasarım</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Diş Haritası İşleyişi</h2>
+            
+            <div class="card">
+                <p>Diş haritası, uygulamanın kalbi niteliğindedir. SVG formatında hazırlanan bu harita, her dişe benzersiz bir ID atayarak JavaScript ile etkileşime olanak sağlar.</p>
+                
+                <div class="function-flow">
+                    <h3>Diş Seçim ve Not Ekleme Süreci</h3>
+                    <ol class="flow-steps">
+                        <li class="flow-step">Kullanıcı diş haritasında bir dişe tıklar</li>
+                        <li class="flow-step">JavaScript, seçilen dişin ID'sini alır</li>
+                        <li class="flow-step">Diş görsel olarak vurgulanır ve animasyonlar devreye girer</li>
+                        <li class="flow-step">Not girişi popup'ı seçilen dişin üzerinde belirir</li>
+                        <li class="flow-step">Kullanıcı tedavi notunu girer ve kaydeder</li>
+                        <li class="flow-step">Not bir JavaScript objesinde saklanır</li>
+                        <li class="flow-step">Tedavi gören diş sarı renkle işaretlenir</li>
+                        <li class="flow-step">Yapılan işlem, işlem listesinde görüntülenir</li>
+                    </ol>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://www.claudeusercontent.com/api/placeholder/600/350" alt="Diş haritası arayüzü" class="code-image">
+                    <p class="image-caption">Diş Haritası Arayüzü - Her diş benzersiz bir ID ile tanımlanmıştır</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Anahtar JavaScript Fonksiyonları</h2>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="tab1">SVG Kontrol</div>
+                    <div class="tab" data-tab="tab2">Diş Efektleri</div>
+                    <div class="tab" data-tab="tab3">Not Ekleme</div>
+                </div>
+                
+                <div class="tab-content active" id="tab1">
+                    <h3>SVG'nin Kontrolü - checkSVG Fonksiyonu</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>javascript</span>
+                        </div>
+                        <div class="code-content">
+<span class="keyword">function</span> <span class="function">checkSVG</span>() {
+    <span class="variable">svg</span> = <span class="variable">document</span>.getElementById(<span class="string">'svg'</span>);
+    <span class="keyword">if</span> (<span class="variable">svg</span>) {
+        markSavedTeeth();
+        addClickEvent();
+    } <span class="keyword">else</span> {
+        <span class="comment">// SVG henüz yüklenmemiş, tekrar deneyin</span>
+        setTimeout(checkSVG, 500);
+    }
+}
+</div>
+                    </div>
+                    <p>Bu fonksiyon, SVG'nin DOM'a yüklenip yüklenmediğini kontrol eder. Eğer SVG yüklenirse, daha önce kaydedilmiş dişleri işaretler ve tıklama olaylarını ekler. Eğer SVG henüz yüklenmemişse, 500ms sonra tekrar kontrol etmek üzere bir zamanlayıcı başlatır.</p>
+                </div>
+                
+                <div class="tab-content" id="tab2">
+                    <h3>Diş Efektlerinin Eklenmesi</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>javascript</span>
+                        </div>
+                        <div class="code-content">
+<span class="keyword">function</span> <span class="function">addToothEffects</span>(<span class="variable">tooth</span>) {
+    <span class="comment">// Daha önce seçilen dişi temizle</span>
+    clearToothEffects();
+    
+    <span class="comment">// Yeni seçilen dişe efektler ekle</span>
+    <span class="variable">tooth</span>.classList.add(<span class="string">'selected-tooth'</span>);
+    <span class="variable">tooth</span>.classList.add(<span class="string">'tooth-pop'</span>);
+    <span class="variable">tooth</span>.classList.add(<span class="string">'highlight'</span>);
+    
+    <span class="comment">// Seçilen dişi global değişkende sakla</span>
+    <span class="variable">selectedTooth</span> = <span class="variable">tooth</span>;
+}
+</div>
+                    </div>
+                    <p>Bu fonksiyon, kullanıcının tıkladığı dişe görsel efektler ekler. Önce daha önce seçilmiş dişten efektleri kaldırır, ardından yeni seçilen dişe CSS sınıfları ekleyerek animasyonları tetikler. Seçilen diş, global bir değişkende saklanarak daha sonra erişilebilir hale gelir.</p>
+                </div>
+                
+                <div class="tab-content" id="tab3">
+                    <h3>Not Ekleme ve Kaydetme</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>javascript</span>
+                        </div>
+                        <div class="code-content">
+<span class="keyword">function</span> <span class="function">saveToothNote</span>() {
+    <span class="keyword">const</span> <span class="variable">noteTitle</span> = <span class="variable">document</span>.getElementById(<span class="string">'note-title'</span>).value;
+    <span class="keyword">const</span> <span class="variable">noteText</span> = <span class="variable">document</span>.getElementById(<span class="string">'note-text'</span>).value;
+    
+    <span class="keyword">if</span> (!<span class="variable">noteText</span>.trim()) {
+        alert(<span class="string">'Lütfen bir not giriniz!'</span>);
+        <span class="keyword">return</span>;
+    }
+    
+    <span class="keyword">const</span> <span class="variable">toothId</span> = <span class="variable">selectedTooth</span>.getAttribute(<span class="string">'id'</span>);
+    
+    <span class="comment">// Notu kaydet</span>
+    <span class="variable">savedTeeth</span>[<span class="variable">toothId</span>] = {
+        title: <span class="variable">noteTitle</span>,
+        note: <span class="variable">noteText</span>,
+        date: <span class="keyword">new</span> <span class="function">Date</span>().toLocaleString()
+    };
+    
+    <span class="comment">// Dişi işaretle</span>
+    <span class="variable">selectedTooth</span>.classList.add(<span class="string">'saved-tooth'</span>);
+    
+    <span class="comment">// Popup'ı kapat</span>
+    closePopup();
+    
+    <span class="comment">// İşlem listesini güncelle</span>
+    updateProceduresList();
+}
+</div>
+                    </div>
+                    <p>Bu fonksiyon, kullanıcının girdiği tedavi notunu kaydeder. Notun boş olup olmadığını kontrol eder, ardından seçilen dişin ID'sini alarak notu bir JavaScript objesinde saklar. Dişi sarı renkle işaretler, popup'ı kapatır ve işlem listesini günceller.</p>
+                </div>
+            </div>
+            
+            <div class="note">
+                <strong>Not:</strong> JavaScript kodları modüler yapıda düzenlenmiş olup, her fonksiyon belirli bir görevi yerine getirmektedir. Bu yaklaşım, kodun okunabilirliğini ve bakımını kolaylaştırır.
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>SVG Click Event Listener</h2>
+            
+            <div class="image-container">
+                <img src="https://www.claudeusercontent.com/api/placeholder/600/350" alt="SVG Click Event" class="code-image" id="svg-click-image">
+                <p class="image-caption">SVG Click Event Listener Kodu</p>
+            </div>
+            
+            <div class="card">
+                <p>Diş haritasında tıklama olaylarını yöneten bu kod parçası, kullanıcının tıkladığı elementi analiz ederek doğru dişi tespit eder ve gerekli işlemleri başlatır.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>javascript</span>
+                    </div>
+                    <div class="code-content">
+<span class="variable">svg</span>.addEventListener(<span class="string">'click'</span>, <span class="keyword">function</span>(<span class="variable">e</span>) {
+    <span class="comment">// Tıklanan dişi buluyoruz</span>
+    <span class="keyword">let</span> <span class="variable">targetElement</span> = <span class="variable">e</span>.target;
+    
+    <span class="comment">// SVG içinde path elementi bulana kadar yukarı çıkıyoruz</span>
+    <span class="keyword">while</span> (<span class="variable">targetElement</span> && <span class="variable">targetElement</span> !== <span class="variable">svg</span>) {
+        <span class="keyword">if</span> (<span class="variable">targetElement</span>.tagName.toLowerCase() === <span class="string">'path'</span>) {
+            <span class="keyword">const</span> <span class="variable">id</span> = <span class="variable">targetElement</span>.getAttribute(<span class="string">'id'</span>);
+            
+            <span class="comment">// Bu diş zaten seçili mi kontrol ediyoruz</span>
+            <span class="keyword">if</span> (<span class="variable">savedTeeth</span>[<span class="variable">id</span>]) {
+                <span class="comment">// Aynı dişe tekrar tıklandığında popup kapanıyor</span>
+                <span class="keyword">if</span> (<span class="variable">selectedTooth</span> === <span class="variable">targetElement</span> && <span class="variable">notePopup</span>.style.display === <span class="string">'block'</span>) {
+                    closePopup();
+                    <span class="keyword">return</span>;
+                }
+            }
+            
+            <span class="comment">// Diş efektlerini ekliyoruz</span>
+            addToothEffects(<span class="variable">targetElement</span>);
+            
+            <span class="comment">// Diş notu popup'ını gösteriyoruz</span>
+            showNotePopup(<span class="variable">targetElement</span>);
+            
+            <span class="keyword">break</span>;
+        }
+        <span class="variable">targetElement</span> = <span class="variable">targetElement</span>.parentElement;
+    }
+});
+</div>
+                </div>
+                
+                <p>Bu kod:</p>
+                <ol>
+                    <li>Kullanıcının tıkladığı elementi alır</li>
+                    <li>SVG içinde path elementini (diş) bulana kadar DOM ağacında yukarı doğru ilerler</li>
+                    <li>Bir diş bulduğunda, o dişin ID'sini alır</li>
+                    <li>Dişin daha önce tedavi görüp görmediğini kontrol eder</li>
+                    <li>Aynı dişe ikinci kez tıklanırsa popup'ı kapatır</li>
+                    <li>Diş efektlerini ekler ve not popup'ını gösterir</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Detay Sayfası</h2>
+            
+            <div class="card">
+                <p>Ana sayfadaki tedavi kayıtlarından "Detay" butonuna tıklandığında açılan detay sayfası, belirli bir tedavi işlemine ait detaylı bilgileri gösterir.</p>
+                
+                <div class="function-flow">
+                    <h3>Detay Sayfası Yapısı</h3>
+                    <ol class="flow-steps">
+                        <li class="flow-step">Üst kısımda hasta ve tedavi bilgileri</li>
+                        <li class="flow-step">Orta kısımda diş haritası ve tedavi detayları</li>
+                        <li class="flow-step">Alt kısımda diş notları, ilgili tedaviler ve bakım bilgileri</li>
+                    </ol>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://www.claudeusercontent.com/api/placeholder/600/350" alt="Detay sayfası" class="code-image">
+                    <p class="image-caption">Tedavi Detay Sayfası</p>
+                </div>
+            </div>
+            
+            <div class="note">
+                <strong>Not:</strong> Detay sayfasında, diş haritası yalnızca görüntüleme amaçlıdır ve tedavi gören dişler sarı renkle vurgulanır. Bu sayfada yeni tedavi notu eklenemez, yalnızca var olan notlar görüntülenebilir.
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Dinamik SVG Yükleme</h2>
+            
+            <div class="image-container">
+                <img src="https://www.claudeusercontent.com/api/placeholder/600/200" alt="Dinamik SVG Yükleme" class="code-image">
+                <p class="image-caption">Dinamik SVG Yükleme Kodu</p>
+            </div>
+            
+            <div class="card">
+                <p>Detay sayfasında SVG'nin yüklenme durumunu kontrol eden kod, SVG'nin yüklenmemesi durumunda manuel olarak işlem yapılmasını sağlar:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>javascript</span>
+                    </div>
+                    <div class="code-content">
+<span class="keyword">setTimeout</span>(<span class="keyword">function</span>() {
+    <span class="keyword">if</span> (!<span class="variable">svg</span> || !<span class="variable">document</span>.querySelectorAll(<span class="string">'.saved-tooth'</span>).length) {
+        <span class="variable">document</span>.querySelectorAll(<span class="string">'path[id="12"], path[id="15"]'</span>).forEach(<span class="variable">tooth</span> => {
+            <span class="variable">tooth</span>.classList.add(<span class="string">'saved-tooth'</span>);
+        });
+    }
+}, 2000);
+</div>
+                    </div>
+                    
+                    <p>Bu kod:</p>
+                    <ol>
+                        <li>2000 milisaniye (2 saniye) sonra çalışır</li>
+                        <li>SVG'nin veya işaretlenmiş dişlerin olup olmadığını kontrol eder</li>
+                        <li>Eğer yoksa, belirli ID'lerdeki dişleri manuel olarak işaretler</li>
+                    </ol>
+                    
+                    <p>Bu yaklaşım, uygulamanın farklı yükleme koşullarında da güvenilir bir şekilde çalışmasını sağlar.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Responsive Tasarım</h2>
+            
+            <div class="card">
+                <p>Uygulama, tüm ekran boyutlarında düzgün çalışacak şekilde tasarlanmıştır. Responsive tasarım için kullanılan bazı teknikler:</p>
+                
+                <ul>
+                    <li>CSS media query'leri ile farklı ekran boyutları için özel stiller</li>
+                    <li>Esnek grid ve flex yapıları</li>
+                    <li>Mobil cihazlar için dokunmatik etkileşime uygun butonlar</li>
+                    <li>Tabloların yatay kaydırma özelliği</li>
+                    <li>SVG'nin ekran boyutuna göre oransal ölçeklenmesi</li>
+                </ul>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>css</span>
+                    </div>
+                    <div class="code-content">
+<span class="keyword">@media</span> (max-width: 768px) {
+    <span class="variable">.container</span> {
+        flex-direction: column;
+    }
+    
+    <span class="variable">.tooth-map</span> {
+        width: 100%;
+    }
+    
+    <span class="variable">.procedures-list</span> {
+        width: 100%;
+        margin-top: 2rem;
+    }
+    
+    <span class="variable">.table-container</span> {
+        overflow-x: auto;
+    }
+}
+</div>
+                    </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Proje Zorlukları ve Çözümler</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-title">SVG ve JavaScript Entegrasyonu</div>
+                    <p><strong>Zorluk:</strong> SVG elementlerine JavaScript ile erişmek ve doğru dişi tespit etmek zordu.</p>
+                    <p><strong>Çözüm:</strong> Tıklanan elementten başlayarak DOM ağacında yukarı çıkan bir algoritma geliştirdik. Bu sayede kullanıcı dişin herhangi bir kısmına tıklasa bile doğru dişi tespit edebiliyoruz.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Animasyon Performansı</div>
+                    <p><strong>Zorluk:</strong> Animasyonlar mobil cihazlarda performans sorunlarına neden olabiliyordu.</p>
+                    <p><strong>Çözüm:</strong> GPU hızlandırmalı CSS transform ve opacity özellikleri kullanarak animasyonların daha verimli çalışmasını sağladık. Bu sayede düşük performanslı cihazlarda bile akıcı bir kullanıcı deneyimi sunabiliyoruz.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Popup Konumlandırma</div>
+                    <p><strong>Zorluk:</strong> Not popup'ını her zaman ekran sınırları içinde ve doğru konumda göstermek zordu.</p>
+                    <p><strong>Çözüm:</strong> Tıklanan dişin konumunu hesaplayan ve ekran sınırlarını kontrol eden bir algoritma geliştirdik. Bu sayede popup her zaman görünür ve doğru konumda oluyor.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Veri Saklanması</div>
+                    <p><strong>Zorluk:</strong> Tedavi notlarını kalıcı olarak saklamak gerekiyordu.</p>
+                    <p><strong>Çözüm:</strong> Şu anda notları bir JavaScript objesi içinde saklıyoruz. Gelecekte localStorage veya veritabanı entegrasyonu planlanıyor.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Gelecek Planları</h2>
+            
+            <div class="card">
+                <p>Projeyi daha da geliştirmek için planladığımız özellikler:</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-title">Hasta Veritabanı Entegrasyonu</div>
+                        <p>Hastaların demografik bilgilerini ve tedavi geçmişlerini saklayabilecek bir veritabanı sistemi.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">Çoklu Kullanıcı Desteği</div>
+                        <p>Farklı doktorların kendi hesaplarıyla giriş yapabilmesi ve hasta kayıtlarına erişebilmesi.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">3D Diş Modelleri</div>
+                        <p>Daha detaylı inceleme için üç boyutlu diş modellerinin entegrasyonu.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">Tedavi Plan Çizelgesi</div>
+                        <p>Hastalar için uzun vadeli tedavi planlarını görselleştiren bir zaman çizelgesi.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">Mobil Uygulama</div>
+                        <p>Web uygulamasının tüm özelliklerini içeren native mobil uygulama.</p>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-title">Offline Çalışma Modu</div>
+                        <p>İnternet bağlantısı olmadan da çalışabilme özelliği.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Öğrenilen Teknik Beceriler</h2>
+            
+            <div class="card">
+                <p>Bu projeyi geliştirirken kazandığımız teknik beceriler:</p>
+                
+                <ol>
+                    <li><strong>SVG Manipülasyonu:</strong> SVG elementlerinin JavaScript ile kontrolü</li>
+                    <li><strong>DOM Traversal:</strong> DOM ağacında gezinerek elementleri tespit etme</li>
+                    <li><strong>Event Delegation:</strong> Etkin olay yönetimi için event delegation teknikleri</li>
+                    <li><strong>CSS Animasyonlar:</strong> Performans odaklı CSS animasyonları</li>
+                    <li><strong>Responsive Tasarım:</strong> Tüm cihazlarda çalışan arayüz tasarımı</li>
+                    <li><strong>JavaScript ile Dinamik İçerik:</strong> Kullanıcı etkileşimine göre içerik güncelleme</li>
+                </ol>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Diş Haritası Projesi &copy; 2025 | Geliştiren: Mehmet Doğan | SVG Tasarım: Enes Bekik</p>
+            <p>Bu proje açık kaynaklıdır ve GitHub'dan indirilebilir.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Sekmelerin işlevselliği için basit bir JavaScript kodu
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Aktif sekmeyi değiştir
+                    document.querySelector('.tab.active').classList.remove('active');
+                    this.classList.add('active');
+                    
+                    // Aktif içeriği değiştir
+                    const tabId = this.getAttribute('data-tab');
+                    document.querySelector('.tab-content.active').classList.remove('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
