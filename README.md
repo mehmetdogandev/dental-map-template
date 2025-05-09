@@ -219,7 +219,6 @@ Diş seçiminde kullanıcı deneyimini zenginleştirmek için CSS animasyonları
         <br />
         <small>JavaScript ve Detay Sayfaları</small>
       </td>
-      
       <td align="center">
         <a href="https://github.com/enesbekik">
           <img src="https://github.com/enesbekik.png" width="100px;" alt="Enes Bekik"/>
